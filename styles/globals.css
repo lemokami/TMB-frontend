@@ -8,3 +8,9 @@
     font-family: 'Space Mono', monospace;
   }
 }
+
+@layer components {
+  .wallet-adapter-button-trigger {
+    background-color: #512da8;
+  }
+}
