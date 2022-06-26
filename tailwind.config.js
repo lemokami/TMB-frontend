@@ -5,6 +5,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    colors: {
+      black: '#000000',
+      'dark-gray': '#262626',
+      'light-gray': '#e1e1e1',
+    },
     extend: {
       fontFamily: {
         'space-mono': ['Space Mono', 'monospace'],
