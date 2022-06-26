@@ -7,6 +7,7 @@ const PrivateRoute: FC<{ children: ReactNode }> = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
+    console.log(wallet);
     if (!wallet) {
       router.push('/login');
     }
