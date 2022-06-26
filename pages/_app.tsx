@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { WalletContext } from '../components/WalletContext';
+import { WalletContext } from '../hoc/WalletContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
