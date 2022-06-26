@@ -4,6 +4,7 @@
 
 @layer base {
   body {
+    @apply text-dark-gray;
     font-family: 'Space Mono', monospace;
   }
 }
