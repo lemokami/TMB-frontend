@@ -11,7 +11,7 @@
 
 @layer components {
   .wallet-adapter-button-trigger {
-    background-color: #512da8;
+    background-color: #512da8 !important;
   }
   input,
   textarea {
