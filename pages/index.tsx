@@ -40,9 +40,9 @@ const Home: NextPage = () => {
 
   return (
     <PrivateRoute>
-      <Navbar>
+      <Navbar wallet>
         <Link href='/create' passHref>
-          <AiOutlineUpload className='text-2xl cursor-pointer bg-light-gray rounded-full' />
+          <AiOutlineUpload className='text-2xl cursor-pointer hover:bg-light-gray rounded-full' />
         </Link>
         <Link href='/user' passHref>
           <AiOutlineUser className='text-2xl cursor-pointer hover:bg-light-gray rounded-full' />
