@@ -13,4 +13,11 @@
   .wallet-adapter-button-trigger {
     background-color: #512da8;
   }
+  input {
+    @apply p-2 border border-dark-gray rounded w-full;
+  }
+  button,
+  [type='submit'] {
+    @apply p-4 px-8 bg-dark-gray text-light-gray rounded;
+  }
 }
