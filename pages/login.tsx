@@ -7,11 +7,12 @@ import Navbar from '../components/Navbar';
 const Login = () => {
   const wallet = useAnchorWallet();
   const router = useRouter();
+
   useEffect(() => {
     if (wallet) {
       // TODO: send signin request
       // redirect to home
-      router.push('/');
+      router.push('/user');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet]);
