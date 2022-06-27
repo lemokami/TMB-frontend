@@ -13,7 +13,8 @@
   .wallet-adapter-button-trigger {
     background-color: #512da8;
   }
-  input {
+  input,
+  textarea {
     @apply p-2 border border-dark-gray rounded w-full;
   }
   button,
