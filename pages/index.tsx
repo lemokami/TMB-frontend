@@ -6,7 +6,7 @@ import {
   AiOutlineUpload,
   AiOutlineUser,
 } from 'react-icons/ai';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import Navbar from '../components/Navbar';
 import Post from '../components/Post';
 import { AXIOS } from '../helpers/axios';
@@ -16,14 +16,21 @@ import { Post as PostT } from '../types/Post';
 const Home: NextPage = () => {
   const router = useRouter();
   const wallet = useAnchorWallet();
+  const queryClient = useQueryClient();
 
   const { isError, isLoading, data } = useQuery('posts', async () =>
     // getting posts
-    AXIOS.get('localhost:5000/api/posts')
+    AXIOS.get('/api/posts')
   );
 
-  const likePostMutation = useMutation((id: string | number) =>
-    AXIOS.patch(`/like/${id}`, { user_id: wallet?.publicKey.toString() })
+  const likePostMutation = useMutation(
+    (id: string | number) =>
+      AXIOS.patch(`/like/${id}`, { key: wallet?.publicKey.toString() }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('posts');
+      },
+    }
   );
 
   const likePost = (id: string | number) => {
@@ -70,6 +77,7 @@ const Home: NextPage = () => {
             likes={10}
             likeAction={() => {
               console.log('like++');
+              likePost(1);
             }}
           />
         </div>
