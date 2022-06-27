@@ -53,7 +53,7 @@ const Create = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col flex-1 justify-evenly my-10 items-center'>
-        <div className='flex flex-col'>
+        <div className='flex flex-col px-4'>
           <div
             className={`h-auto max-w-3xl ${
               img ? 'border' : ''
@@ -71,7 +71,7 @@ const Create = () => {
 
           <span className='text-red text-sm'>{imgError}</span>
         </div>
-        <div className='flex flex-col gap-2 w-1/3'>
+        <div className='flex flex-col px-4 gap-2 w-full md:w-1/2 xl:w-1/3'>
           {/* name input  */}
           <label className='flex flex-col items-start'>
             <span>Caption:</span>

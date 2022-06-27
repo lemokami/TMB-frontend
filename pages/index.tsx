@@ -40,7 +40,7 @@ const Home: NextPage = () => {
 
   return (
     <PrivateRoute>
-      <Navbar wallet>
+      <Navbar>
         <Link href='/create' passHref>
           <AiOutlineUpload className='text-2xl cursor-pointer bg-light-gray rounded-full' />
         </Link>
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
           <AiOutlineUser className='text-2xl cursor-pointer hover:bg-light-gray rounded-full' />
         </Link>
       </Navbar>
-      <div className='flex justify-center my-10'>
+      <div className='flex justify-center my-10 px-4'>
         <div className=' flex flex-col space-y-8'>
           {isLoading && (
             <AiOutlineLoading3Quarters className='animate-spin self-center text-4xl' />

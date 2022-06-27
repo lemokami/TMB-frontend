@@ -31,12 +31,14 @@ const Post: FC<PostType> = (props) => {
             {props.likes}
           </div>
           {props.shareable && (
-            <button onClick={(e) => console.log('share++')} className='p-2'>
+            <button
+              onClick={(e) => console.log('share++')}
+              className='p-1 px-4'>
               Share
             </button>
           )}
         </div>
-        <span className='mb-2'>{props.caption}</span>
+        <div className='mt-3 mb-1'>{props.caption}</div>
       </div>
     </div>
   );

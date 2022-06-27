@@ -48,7 +48,7 @@ const User = () => {
         <Navbar wallet />
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='flex flex-1 items-center justify-evenly'>
+          className='flex flex-col xl:flex-row flex-1 items-center justify-evenly'>
           <div className='flex flex-col'>
             <div className='rounded-full h-80 w-80 border mb-2 overflow-hidden'>
               {img && (
@@ -70,7 +70,7 @@ const User = () => {
 
             <span className='text-red text-sm'>{imgError}</span>
           </div>
-          <div className='flex flex-col gap-2 w-1/4'>
+          <div className='flex flex-col gap-2 w-full md:w-1/2 xl:w-1/4 px-4'>
             {/* name input  */}
             <label className='flex flex-col items-start'>
               <span>Name:</span>
