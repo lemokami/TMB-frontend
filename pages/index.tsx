@@ -40,9 +40,12 @@ const Home: NextPage = () => {
   return (
     <PrivateRoute>
       <Navbar wallet>
-        <AiOutlineUpload className='text-2xl cursor-pointer hover:bg-light-gray rounded-full' />
+        <AiOutlineUpload
+          onClick={() => router.push('/create')}
+          className='text-2xl cursor-pointer hover:bg-light-gray rounded-full'
+        />
         <AiOutlineUser
-          onClick={(e) => router.push('/user')}
+          onClick={() => router.push('/user')}
           className='text-2xl cursor-pointer hover:bg-light-gray rounded-full'
         />
       </Navbar>
