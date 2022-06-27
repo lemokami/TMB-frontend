@@ -21,7 +21,7 @@ const Home: NextPage = () => {
 
   const { isError, isLoading, data } = useQuery('posts', async () =>
     // getting posts
-    AXIOS.get('/api/posts')
+    AXIOS.get('/posts')
   );
 
   const likePostMutation = useMutation(
@@ -71,17 +71,6 @@ const Home: NextPage = () => {
                 likeAction={() => likePost(post.id)}
               />
             ))}
-          <Post
-            imageUrl='https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
-            caption='A picture of a cat'
-            author='John Doe'
-            shareable={true}
-            likes={10}
-            likeAction={() => {
-              console.log('like++');
-              likePost(1);
-            }}
-          />
         </div>
       </div>
     </PrivateRoute>
