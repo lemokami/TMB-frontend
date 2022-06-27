@@ -51,7 +51,13 @@ const User = () => {
           className='flex flex-1 items-center justify-evenly'>
           <div className='flex flex-col'>
             <div className='rounded-full h-80 w-80 border mb-2 overflow-hidden'>
-              {img && <img src={fileBlob} alt='avatar' className='bg-cover' />}
+              {img && (
+                <img
+                  src={fileBlob}
+                  alt='avatar'
+                  className='object-cover h-full w-full'
+                />
+              )}
             </div>
             <label htmlFor='profile_img'>Profile Image</label>
             <input
