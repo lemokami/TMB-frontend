@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEventHandler, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -42,11 +43,12 @@ const Create = () => {
   return (
     <div className='flex flex-col min-h-screen'>
       <Navbar wallet>
-        <AiOutlineUpload className='text-2xl cursor-pointer bg-light-gray rounded-full' />
-        <AiOutlineUser
-          onClick={(e) => router.push('/user')}
-          className='text-2xl cursor-pointer hover:bg-light-gray rounded-full'
-        />
+        <Link href='/create' passHref>
+          <AiOutlineUpload className='text-2xl cursor-pointer bg-light-gray rounded-full' />
+        </Link>
+        <Link href='/user' passHref>
+          <AiOutlineUser className='text-2xl cursor-pointer hover:bg-light-gray rounded-full' />
+        </Link>
       </Navbar>
       <form
         onSubmit={handleSubmit(onSubmit)}

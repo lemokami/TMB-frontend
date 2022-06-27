@@ -1,5 +1,6 @@
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
   AiOutlineLoading3Quarters,
@@ -40,14 +41,12 @@ const Home: NextPage = () => {
   return (
     <PrivateRoute>
       <Navbar wallet>
-        <AiOutlineUpload
-          onClick={() => router.push('/create')}
-          className='text-2xl cursor-pointer hover:bg-light-gray rounded-full'
-        />
-        <AiOutlineUser
-          onClick={() => router.push('/user')}
-          className='text-2xl cursor-pointer hover:bg-light-gray rounded-full'
-        />
+        <Link href='/create' passHref>
+          <AiOutlineUpload className='text-2xl cursor-pointer bg-light-gray rounded-full' />
+        </Link>
+        <Link href='/user' passHref>
+          <AiOutlineUser className='text-2xl cursor-pointer hover:bg-light-gray rounded-full' />
+        </Link>
       </Navbar>
       <div className='flex justify-center my-10'>
         <div className=' flex flex-col space-y-8'>
