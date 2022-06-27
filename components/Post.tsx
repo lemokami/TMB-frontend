@@ -17,7 +17,7 @@ const Post: FC<PostType> = (props) => {
       <div className='p-2'>{props.author}</div>
       <div className=' w-full overflow-hidden'>
         <img
-          src={props.imageUrl}
+          src={process.env.NEXT_PUBLIC_API_URL + '/' + props.imageUrl}
           alt={props.caption}
           className='bg-cover w-full h-full'
         />
