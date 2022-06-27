@@ -41,14 +41,11 @@ const Home: NextPage = () => {
   return (
     <PrivateRoute>
       <Navbar wallet>
-        <Link href='/create' passHref>
+        <Link href='/new/post' passHref>
           <AiOutlineUpload className='text-2xl cursor-pointer hover:bg-light-gray rounded-full' />
         </Link>
-        <Link href='/user' passHref>
-          <AiOutlineUser className='text-2xl cursor-pointer hover:bg-light-gray rounded-full' />
-        </Link>
       </Navbar>
-      <div className='flex justify-center my-10 px-4'>
+      <div className='flex justify-center my-10 px-4 w-auto xl:w-1/2 mx-auto'>
         <div className=' flex flex-col space-y-8'>
           {isLoading && (
             <AiOutlineLoading3Quarters className='animate-spin self-center text-4xl' />
