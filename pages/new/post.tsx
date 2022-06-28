@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useAnchorWallet } from '@solana/wallet-adapter-react';
+import { AnchorWallet, useAnchorWallet } from '@solana/wallet-adapter-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEventHandler, useEffect, useState } from 'react';
@@ -8,6 +8,7 @@ import { AiOutlineUpload, AiOutlineUser } from 'react-icons/ai';
 import { useMutation, useQueryClient } from 'react-query';
 import Navbar from '../../components/Navbar';
 import { AXIOS } from '../../helpers/axios';
+import { createPostContract } from '../../helpers/contract';
 import PrivateRoute from '../../hoc/PrivateRoute';
 import { createPostSchema } from '../../schema/createPostFormSchema';
 import { createPostType } from '../../types/Forms';
@@ -50,8 +51,9 @@ const Post = () => {
       return AXIOS.post('/post', data);
     },
     {
-      onSuccess: (data) => {
+      onSuccess: (data:any) => {
         console.log(data);
+        createPostContract(wallet as AnchorWallet,data.shareable,data.metaHash)
         router.push('/');
       },
       onError: (error: any) => {
