@@ -68,6 +68,7 @@ const Home: NextPage = () => {
                 likes={+post.likes}
                 likeAction={() => likePost(post._id)}
                 owner={post.owner}
+                pid={post.pid}
               />
             ))}
         </div>
