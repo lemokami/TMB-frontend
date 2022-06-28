@@ -13,6 +13,7 @@ type PostType = {
   likes: number;
   likeAction: () => void;
   owner: dbUser;
+  imageHash:string;
 };
 const Post: FC<PostType> = (props) => {
   const wallet = useAnchorWallet();
@@ -21,7 +22,7 @@ const Post: FC<PostType> = (props) => {
       <div className='p-2'>{props.author}</div>
       <div className=' w-full overflow-hidden'>
         <img
-          src={process.env.NEXT_PUBLIC_API_URL + '/' + props.imageUrl}
+          src={`http://localhost:8080/ipfs/${props.imageHash}`}
           alt={props.caption}
           className='bg-cover w-full h-full'
         />
