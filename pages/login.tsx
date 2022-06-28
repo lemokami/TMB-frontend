@@ -18,15 +18,14 @@ const Login = () => {
       }),
     {
       onSuccess: (data) => {
-        setAuthenticated(true);
         setUser(data.data);
+        setAuthenticated(true);
       },
     }
   );
 
   useEffect(() => {
     if (wallet) {
-      // TODO: send signin request
       createOrCheckUser.mutate();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,7 +34,6 @@ const Login = () => {
   useEffect(() => {
     if (authenticated) {
       sessionStorage.setItem('user', JSON.stringify(user));
-      console.log(user);
       if (user.completed_profile === false) {
         router.push('/new/profile');
       } else {
