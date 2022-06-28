@@ -41,12 +41,7 @@ export const createPostContract = async (
   // console.log(program.account.metadata.fetch(wallet.publicKey))
 };
 
-export const sharePostContract = async (
-  wallet: AnchorWallet,
-  shareable: boolean,
-  metaHash: string,
-  postID: any
-) => {
+export const sharePostContract = async (wallet: AnchorWallet, postID: any) => {
   const provider = await getProvider(wallet, 'processed');
 
   if (!provider) {
