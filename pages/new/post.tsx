@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineUpload, AiOutlineUser } from 'react-icons/ai';
 import { useMutation, useQueryClient } from 'react-query';
@@ -22,6 +22,7 @@ const Post = () => {
   const [imgError, setImgError] = useState<string | null>(null);
   const [existsError, setExistsError] = useState<boolean>(false);
   const [errMessage, setErrMessage] = useState('');
+  const [user, setUser] = useState<any>(null);
 
   const {
     register,
@@ -32,6 +33,11 @@ const Post = () => {
     resolver: yupResolver(createPostSchema),
   });
 
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem('user') + '');
+    setUser(user);
+  }, []);
+
   const createPost = useMutation(
     (formData: any) => {
       const data = new FormData();
@@ -39,6 +45,7 @@ const Post = () => {
       data.append('caption', formData.caption);
       data.append('shareable', formData.shareable);
       data.append('key', wallet?.publicKey.toString()!);
+      data.append('user_id', user?._id);
 
       return AXIOS.post('/post', data);
     },
