@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { FC } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { dbUser } from '../types/User';
 
 type PostType = {
   id?: string | number;
@@ -10,8 +12,10 @@ type PostType = {
   shareable: boolean;
   likes: number;
   likeAction: () => void;
+  owner: dbUser;
 };
 const Post: FC<PostType> = (props) => {
+  const wallet = useAnchorWallet();
   return (
     <div className='flex flex-col border border-light-gray rounded'>
       <div className='p-2'>{props.author}</div>
@@ -30,7 +34,7 @@ const Post: FC<PostType> = (props) => {
             <AiOutlineHeart className='text-xl' />
             {props.likes}
           </div>
-          {props.shareable && (
+          {props.shareable && props.owner.key !== wallet?.publicKey.toString() && (
             <button
               onClick={(e) => console.log('share++')}
               className='p-1 px-4'>
