@@ -49,17 +49,20 @@ const Post = () => {
     {
       onSuccess: async (data, variables: any) => {
         try {
-          await createPostContract(
+          const cData = await createPostContract(
             wallet as AnchorWallet,
             variables.shareable,
             variables.metaHash
           );
 
+          if (!cData) throw Error('Error with Smart Contract');
           createPost.mutate({
             ...data.data,
             ...variables,
             key: wallet?.publicKey.toString(),
             user_id: user?._id,
+            tx: cData,
+            pid: JSON.stringify(cData.postID),
           });
         } catch (error) {
           console.log(error);
