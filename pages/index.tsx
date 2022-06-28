@@ -66,6 +66,7 @@ const Home: NextPage = () => {
                 shareable={post.shareable}
                 likes={+post.likes}
                 likeAction={() => likePost(post.id)}
+                owner={post.owner}
               />
             ))}
         </div>
