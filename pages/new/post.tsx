@@ -39,32 +39,56 @@ const Post = () => {
     setUser(user);
   }, []);
 
-  const createPost = useMutation(
-    (formData: any) => {
-      const data = new FormData();
-      data.append('file', img);
-      data.append('caption', formData.caption);
-      data.append('shareable', formData.shareable);
-      data.append('key', wallet?.publicKey.toString()!);
-      data.append('user_id', user?._id);
+  const createHash = useMutation(
+    (data: any) => {
+      const formData = new FormData();
+      formData.append('file', img);
 
-      return AXIOS.post('/post', data);
+      return AXIOS.post('/create/hash', formData);
     },
     {
-      onSuccess: (data:any) => {
-        console.log(data);
-        createPostContract(wallet as AnchorWallet,data.shareable,data.metaHash)
-        router.push('/');
+      onSuccess: async (data, variables: any) => {
+        try {
+          await createPostContract(
+            wallet as AnchorWallet,
+            variables.shareable,
+            variables.metaHash
+          );
+
+          createPost.mutate({
+            ...data.data,
+            ...variables,
+            key: wallet?.publicKey.toString(),
+            user_id: user?._id,
+          });
+        } catch (error) {
+          console.log(error);
+        }
       },
-      onError: (error: any) => {
+      onError: (error: any, variables) => {
         if (error.response!.status === 400) {
           setErrMessage('Error parsing file');
         } else if (error.response!.status === 409) {
           setErrMessage('Post already exists');
+        } else {
+          setErrMessage(error.message);
         }
 
         setExistsError(true);
         reset();
+      },
+    }
+  );
+
+  const createPost = useMutation(
+    (data: any) => {
+      console.log('post', data);
+
+      return AXIOS.post('/create/post', data);
+    },
+    {
+      onSuccess: () => {
+        router.push('/');
       },
     }
   );
@@ -74,7 +98,7 @@ const Post = () => {
       setImgError('Please select an image');
       return;
     }
-    createPost.mutate(data);
+    createHash.mutate(data);
     queryClient.invalidateQueries('posts');
   };
 
