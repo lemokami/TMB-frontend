@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { useAnchorWallet } from '@solana/wallet-adapter-react';
+import { AnchorWallet, useAnchorWallet } from '@solana/wallet-adapter-react';
 import { FC } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { sharePostContract } from '../helpers/contract';
 import { dbUser } from '../types/User';
 
 type PostType = {
@@ -13,10 +14,15 @@ type PostType = {
   likes: number;
   likeAction: () => void;
   owner: dbUser;
-  imageHash:string;
+  imageHash: string;
+  pid: string;
 };
 const Post: FC<PostType> = (props) => {
   const wallet = useAnchorWallet();
+
+  const handleShare = async () => {
+    await sharePostContract(wallet as AnchorWallet, JSON.parse(props.pid));
+  };
   return (
     <div className='flex flex-col border border-light-gray rounded'>
       <div className='p-2'>{props.author}</div>
@@ -36,9 +42,7 @@ const Post: FC<PostType> = (props) => {
             {props.likes}
           </div>
           {props.shareable && props.owner.key !== wallet?.publicKey.toString() && (
-            <button
-              onClick={(e) => console.log('share++')}
-              className='p-1 px-4'>
+            <button onClick={handleShare} className='p-1 px-4'>
               Share
             </button>
           )}
