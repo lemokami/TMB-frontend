@@ -22,6 +22,7 @@ const Post: FC<PostType> = (props) => {
 
   const handleShare = async () => {
     await sharePostContract(wallet as AnchorWallet, JSON.parse(props.pid));
+    console.log(props.pid);
   };
   return (
     <div className='flex flex-col border border-light-gray rounded'>

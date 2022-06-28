@@ -10,7 +10,7 @@ export const createPostContract = async (
 ) => {
   const provider = await getProvider(wallet, 'processed');
   const postID = web3.Keypair.generate();
-
+  
   if (!provider) {
     return null;
   }
@@ -26,6 +26,9 @@ export const createPostContract = async (
       },
       signers: [postID],
     });
+
+    // console.log(shareable, wallet.publicKey, metaHash)
+
     tx = await program.rpc.uploadmedia(shareable, wallet.publicKey, metaHash, {
       accounts: {
         data: postID.publicKey,
@@ -34,6 +37,7 @@ export const createPostContract = async (
     });
     return { tx: tx, postID: postID.publicKey };
   } catch (error) {
+    console.log(error)
     return null;
   }
 
