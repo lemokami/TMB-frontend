@@ -32,7 +32,7 @@ export const createPostContract = async (
       },
       signers: [],
     });
-    return tx;
+    return { tx: tx, postID: postID.publicKey };
   } catch (error) {
     return null;
   }
@@ -63,7 +63,7 @@ export const sharePostContract = async (
 
     const tx = await program.rpc.sharemedia(wallet.publicKey, {
       accounts: {
-        data: postID.publicKey,
+        data: postID,
       },
       signers: [],
     });
