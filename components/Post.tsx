@@ -2,6 +2,7 @@
 import { AnchorWallet, useAnchorWallet } from '@solana/wallet-adapter-react';
 import { FC } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { AXIOS } from '../helpers/axios';
 import { sharePostContract } from '../helpers/contract';
 import { dbUser } from '../types/User';
 
@@ -21,8 +22,12 @@ const Post: FC<PostType> = (props) => {
   const wallet = useAnchorWallet();
 
   const handleShare = async () => {
-    await sharePostContract(wallet as AnchorWallet, JSON.parse(props.pid));
-    console.log(props.pid);
+    await sharePostContract(wallet as AnchorWallet, props.pid);
+
+    await AXIOS.post('/share/post', {
+      pid: props.pid,
+      sharer_id: JSON.parse(sessionStorage.getItem('user') + '')._id,
+    });
   };
   return (
     <div className='flex flex-col border border-light-gray rounded'>
