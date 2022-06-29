@@ -9,15 +9,14 @@ export type User = {
 };
 
 export type dbUser = {
-  likedby: any[];
-  own: any[];
-  shared: any[];
   _id: string;
-  key: string;
-  completed_profile: boolean;
+  key: '7hYJtLWW4TWCqZixNCgK1nfYx7pa9zRW6pP1fMPc7zYP';
+  completed_profile: true;
+  liked: string[];
+  own: string[];
+  shared: string[];
   createdAt: string;
   updatedAt: string;
-  __v: number;
   age: number;
   name: string;
   profile_img: string;

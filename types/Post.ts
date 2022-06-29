@@ -1,3 +1,4 @@
+import { string } from 'yup';
 import { dbUser } from './User';
 
 export type Post = {
@@ -14,15 +15,14 @@ export type Post = {
 export type dbPost = {
   _id: string;
   path: string;
-  likes: number;
-  shareable: boolean;
+  shareable: true;
   metaHash: string;
-  caption: string;
   metaContentHash: string;
-  owner: dbUser;
-  tid: string;
-  likedby: string[];
+  owner: string;
+  caption: string;
   sharers: string[];
-  tx: string;
   pid: string;
+  tx: string;
+  createdAt: string;
+  updatedAt: string;
 };
