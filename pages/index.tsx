@@ -12,31 +12,13 @@ import Navbar from '../components/Navbar';
 import Post from '../components/Post';
 import { AXIOS } from '../helpers/axios';
 import PrivateRoute from '../hoc/PrivateRoute';
-import { dbPost, Post as PostT } from '../types/Post';
+import { feedPost } from '../types/Feed';
 
 const Home: NextPage = () => {
-  const router = useRouter();
-  const wallet = useAnchorWallet();
-  const queryClient = useQueryClient();
-
   const { isError, isLoading, data } = useQuery('posts', async () =>
     // getting posts
     AXIOS.get('/posts')
   );
-
-  const likePostMutation = useMutation(
-    (id: string | number) =>
-      AXIOS.patch(`/like/${id}`, { key: wallet?.publicKey.toString() }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('posts');
-      },
-    }
-  );
-
-  const likePost = (id: string | number) => {
-    likePostMutation.mutate(id);
-  };
 
   return (
     <PrivateRoute>
@@ -57,20 +39,23 @@ const Home: NextPage = () => {
             </div>
           )}
           {data &&
-            (data.data as dbPost[]).map((post) => (
-              <Post
-                key={post._id}
-                imageUrl={post.path}
-                caption={post.caption}
-                imageHash={post.metaContentHash}
-                author={post.owner.name}
-                shareable={post.shareable}
-                likes={+post.likes}
-                likeAction={() => likePost(post._id)}
-                owner={post.owner}
-                pid={post.pid}
-              />
-            ))}
+            (data.data as feedPost[]).map(
+              ({ post, likes, isOwner, poster, owner, _id }) => (
+                <Post
+                  key={post._id}
+                  id={_id}
+                  imageUrl={post.path}
+                  caption={post.caption}
+                  imageHash={post.metaContentHash}
+                  shareable={post.shareable}
+                  likes={likes}
+                  isOwner={isOwner}
+                  owner={owner}
+                  poster={poster}
+                  pid={post.pid}
+                />
+              )
+            )}
         </div>
       </div>
     </PrivateRoute>
