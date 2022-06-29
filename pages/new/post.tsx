@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { AiOutlineUpload, AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineUpload } from 'react-icons/ai';
 import { useMutation, useQueryClient } from 'react-query';
 import Navbar from '../../components/Navbar';
 import { AXIOS } from '../../helpers/axios';
@@ -49,13 +49,11 @@ const Post = () => {
     {
       onSuccess: async (data, variables: any) => {
         try {
-         
           const cData = await createPostContract(
             wallet as AnchorWallet,
             variables.shareable,
             data.data.metaHash
           );
-          console.log(cData)
 
           if (!cData) throw Error('Error with Smart Contract');
           createPost.mutate({
