@@ -32,6 +32,7 @@ const Login = () => {
   }, [wallet]);
 
   useEffect(() => {
+    sessionStorage.clear();
     if (authenticated) {
       sessionStorage.setItem('user', JSON.stringify(user));
       if (user.completed_profile === false) {
